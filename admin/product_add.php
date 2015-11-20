@@ -1,6 +1,53 @@
 <?php
 include_once './inc/head.php';
 cek_login();
+
+if (isset($_POST['text']) || isset($_POST['title'])) {
+    $text = $_POST['text'];
+    $title = $_POST['title'];
+    if (isset($_FILES['picture'])) {
+        $tempName = $_FILES['picture']['tmp_name'];
+        $fileName = $_FILES['picture']['name'];
+        $saveDirectory = '../img/';
+        if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
+//                echo ' File Successfully Uploaded!';
+            if ($_POST['id'] == '') {
+                $query = "INSERT INTO `west_village`.`topping` (`id`, `title`,`text`,`picture`, `date_upload`) VALUES (NULL,'$title','$text', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
+                $_SESSION['warning'] = "Product added successfully";
+            } else {
+                $id = $_POST['id'];
+                $query = "UPDATE `west_village`.`topping` SET `title`='$title',`text`='$text', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
+                $_SESSION['warning'] = "Product updated successfully";
+            }
+            mysql_query($query);
+            //echo "<script>alert('okedeh 1');</script>";
+        } else {
+            if ($_POST['id'] == '') {
+                $query = "INSERT INTO `west_village`.`topping` (`id`, `title`,`text`, `date_upload`) VALUES (NULL,'$title','$text', CURRENT_TIMESTAMP)";
+                $_SESSION['warning'] = "Product added successfully";
+            } else {
+                $id = $_POST['id'];
+                $query = "UPDATE `west_village`.`product` SET `title`='$title',`text`='$text' WHERE id='$id'";
+                $_SESSION['warning'] = "Product updated successfully";
+            }
+            mysql_query($query);
+            
+            //echo "<script>alert('okedeh 2');</script>";
+        }
+    } else {
+        if ($_POST['id'] == '') {
+            $query = "INSERT INTO `west_village`.`topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
+        } else {
+            $id = $_POST['id'];
+            $query = "UPDATE `west_village`.`topping` SET `title`='$title'";
+        }
+        mysql_query($query);
+        //echo "<script>alert('okedeh 3');</script>";
+    }
+    
+} else {
+    $_SESSION['warning'] = "none";
+}
 ?>
 <script src="tinymce/tinymce.min.js"></script>
 <script>tinymce.init({selector: 'textarea'});</script>
@@ -22,7 +69,7 @@ cek_login();
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <form role="form" method="POST" action="product_add_act.php" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="product_add.php" enctype="multipart/form-data">
                                         <?php
                                         $query = "select * from product where id=" . $_GET['id'];
                                         $result = mysql_query($query);

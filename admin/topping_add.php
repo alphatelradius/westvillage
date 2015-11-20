@@ -16,7 +16,7 @@ if (isset($_POST['title'])) {
                 $query = "UPDATE `west_village`.`topping` SET `title`='$title', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
             }
             mysql_query($query);
-            echo "<script>alert('okedeh 1');</script>";
+            //echo "<script>alert('okedeh 1');</script>";
         } else {
              if ($_POST['id'] == '') {
                 $query = "INSERT INTO `west_village`.`topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
@@ -25,7 +25,7 @@ if (isset($_POST['title'])) {
                 $query = "UPDATE `west_village`.`topping` SET `title`='$title' WHERE id='$id'";
             }
             mysql_query($query);
-            echo "<script>alert('okedeh 2');</script>";
+            //echo "<script>alert('okedeh 2');</script>";
         }
     }else{
          if ($_POST['id'] == '') {
@@ -35,10 +35,10 @@ if (isset($_POST['title'])) {
                 $query = "UPDATE `west_village`.`topping` SET `title`='$title'";
             }
             mysql_query($query);
-            echo "<script>alert('okedeh 3');</script>";
+            //echo "<script>alert('okedeh 3');</script>";
     }
 }else{
-    echo "<script>alert('okedeh');</script>";
+    //echo "<script>alert('okedeh');</script>";
 }
 ?>
 <script src="tinymce/tinymce.min.js"></script>
