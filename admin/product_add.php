@@ -71,8 +71,8 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                                     if ($_SESSION['warning'] != 'none') {
                                         echo '<div class="alert alert-success">' . $_SESSION['warning'] . '</div>';
                                     }
-                                    ?>
                                     echo $query;
+                                    ?>
                                 </div>
                             </div>
                             <div class="row">
