@@ -1,5 +1,5 @@
 <?php
-include_once './inc/head.php';
+include_once './inc/connection.php';
 $text=$_POST['text'];
 $pic = count($_FILES['picture']['tmp_name']);
 for ($i = 0; $i < $pic; $i++) {
