@@ -11,7 +11,7 @@ if (isset($_POST['information']) || isset($_POST['primary_address']) || isset($_
     $twitter = $_POST['twitter'];
     $gplus = $_POST['gplus'];
     $id = $_POST['id'];
-    $query = "UPDATE `west_village`.`setting` SET "
+    $query = "UPDATE `setting` SET "
             . "`information` = '$information',"
             . " `primary_address` = '$primary_address', "
             . "`fb` = '$fb', "

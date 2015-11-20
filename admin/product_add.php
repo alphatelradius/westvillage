@@ -11,22 +11,22 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
         if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
 //                echo ' File Successfully Uploaded!';
             if ($_POST['id'] == '') {
-                $query = "INSERT INTO `west_village`.`product` (`id`, `title`,`text`,`picture`, `date_upload`) VALUES (NULL,'$title','$text', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
+                $query = "INSERT INTO `product` (`id`, `title`,`text`,`picture`, `date_upload`) VALUES (NULL,'$title','$text', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
                 $_SESSION['warning'] = "Product added successfully";
             } else {
                 $id = $_POST['id'];
-                $query = "UPDATE `west_village`.`product` SET `title`='$title',`text`='$text', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
+                $query = "UPDATE `product` SET `title`='$title',`text`='$text', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
                 $_SESSION['warning'] = "Product updated successfully";
             }
             mysql_query($query);
             //echo "<script>alert('okedeh 1');</script>";
         } else {
             if ($_POST['id'] == '') {
-                $query = "INSERT INTO `west_village`.`product` (`id`, `title`,`text`, `date_upload`) VALUES (NULL,'$title','$text', CURRENT_TIMESTAMP)";
+                $query = "INSERT INTO `product` (`id`, `title`,`text`, `date_upload`) VALUES (NULL,'$title','$text', CURRENT_TIMESTAMP)";
                 $_SESSION['warning'] = "Product added successfully";
             } else {
                 $id = $_POST['id'];
-                $query = "UPDATE `west_village`.`product` SET `title`='$title',`text`='$text' WHERE id='$id'";
+                $query = "UPDATE `product` SET `title`='$title',`text`='$text' WHERE id='$id'";
                 $_SESSION['warning'] = "Product updated successfully";
             }
             mysql_query($query);
@@ -35,10 +35,10 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
         }
     } else {
         if ($_POST['id'] == '') {
-            $query = "INSERT INTO `west_village`.`topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
+            $query = "INSERT INTO `product` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
         } else {
             $id = $_POST['id'];
-            $query = "UPDATE `west_village`.`topping` SET `title`='$title',`text`='$text'";
+            $query = "UPDATE `product` SET `title`='$title',`text`='$text'";
         }
         mysql_query($query);
         //echo "<script>alert('okedeh 3');</script>";

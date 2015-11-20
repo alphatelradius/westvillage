@@ -10,29 +10,29 @@ if (isset($_POST['title'])) {
         if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
 //                echo ' File Successfully Uploaded!';
             if ($_POST['id'] == '') {
-                $query = "INSERT INTO `west_village`.`topping` (`id`, `title`,`picture`, `date_upload`) VALUES (NULL,'$title', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
+                $query = "INSERT INTO `topping` (`id`, `title`,`picture`, `date_upload`) VALUES (NULL,'$title', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
             } else {
                 $id=$_POST['id'];
-                $query = "UPDATE `west_village`.`topping` SET `title`='$title', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
+                $query = "UPDATE `topping` SET `title`='$title', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
             }
             mysql_query($query);
             //echo "<script>alert('okedeh 1');</script>";
         } else {
              if ($_POST['id'] == '') {
-                $query = "INSERT INTO `west_village`.`topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
+                $query = "INSERT INTO `topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
             } else {
                 $id=$_POST['id'];
-                $query = "UPDATE `west_village`.`topping` SET `title`='$title' WHERE id='$id'";
+                $query = "UPDATE `topping` SET `title`='$title' WHERE id='$id'";
             }
             mysql_query($query);
             //echo "<script>alert('okedeh 2');</script>";
         }
     }else{
          if ($_POST['id'] == '') {
-                $query = "INSERT INTO `west_village`.`topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
+                $query = "INSERT INTO `topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
             } else {
                 $id=$_POST['id'];
-                $query = "UPDATE `west_village`.`topping` SET `title`='$title'";
+                $query = "UPDATE `topping` SET `title`='$title'";
             }
             mysql_query($query);
             //echo "<script>alert('okedeh 3');</script>";
