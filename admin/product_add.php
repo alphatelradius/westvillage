@@ -31,7 +31,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                 $_SESSION['warning'] = "Product updated successfully";
             }
             mysql_query($query);
-            
+
             //echo "<script>alert('okedeh 2');</script>";
         }
     } else {
@@ -44,7 +44,6 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
         mysql_query($query);
         //echo "<script>alert('okedeh 3');</script>";
     }
-    
 } else {
     $_SESSION['warning'] = "none";
 }
@@ -77,11 +76,13 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                                         $picture = '';
                                         $text = '';
                                         $id = '';
-                                        while ($row = mysql_fetch_array($result)) {
-                                            $title = $row['title'];
-                                            $picture = $row['picture'];
-                                            $text = $row['text'];
-                                            $id = $row['id'];
+                                        if ($result != NULL) {
+                                            while ($row = mysql_fetch_array($result)) {
+                                                $title = $row['title'];
+                                                $picture = $row['picture'];
+                                                $text = $row['text'];
+                                                $id = $row['id'];
+                                            }
                                         }
                                         ?>
                                         <div class="form-group col-md-10">
