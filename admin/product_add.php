@@ -15,7 +15,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                 $_SESSION['warning'] = "Product added successfully";
             } else {
                 $id = $_POST['id'];
-                $query = "UPDATE `product` SET `title`='$title',`text`='$text', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
+                $query = "UPDATE `product` SET `title`='$title',`text`='$text', `picture`= 'img/" . $fileName . "' WHERE id='$id'";
                 $_SESSION['warning'] = "Product updated successfully";
             }
             mysql_query($query);
