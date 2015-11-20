@@ -92,6 +92,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                                                 $id = $row['id'];
                                             }
                                         }
+                                        echo $query;
                                         ?>
                                         <div class="form-group col-md-10">
                                             <?php if ($picture != '') { ?>
