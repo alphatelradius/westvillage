@@ -46,6 +46,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
 } else {
     $_SESSION['warning'] = "none";
 }
+echo $query;
 ?>
 <script src="tinymce/tinymce.min.js"></script>
 <script>tinymce.init({selector: 'textarea'});</script>
@@ -113,8 +114,8 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                                             <textarea class="form-control" rows="3" name="text"><?php echo $text ?></textarea>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <button type="submit" class="btn btn-default">Submit Button</button>
-                                            <button type="reset" class="btn btn-default">Reset Button</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="reset" class="btn btn-default">Reset</button>
                                         </div>
                                     </form>
                                 </div>
