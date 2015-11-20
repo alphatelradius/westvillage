@@ -72,6 +72,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                                         echo '<div class="alert alert-success">' . $_SESSION['warning'] . '</div>';
                                     }
                                     ?>
+                                    echo $query;
                                 </div>
                             </div>
                             <div class="row">
@@ -92,7 +93,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                                                 $id = $row['id'];
                                             }
                                         }
-                                        echo $query;
+                                        
                                         ?>
                                         <div class="form-group col-md-10">
                                             <?php if ($picture != '') { ?>
