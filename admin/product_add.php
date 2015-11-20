@@ -69,7 +69,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <form role="form" method="POST" action="product_add.php" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="product_add.php?id=<?php echo $_GET['id'] ?>" enctype="multipart/form-data">
                                         <?php
                                         $query = "select * from product where id=" . $_GET['id'];
                                         $result = mysql_query($query);
