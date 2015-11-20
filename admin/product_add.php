@@ -38,7 +38,7 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
             $query = "INSERT INTO `west_village`.`topping` (`id`, `title`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
         } else {
             $id = $_POST['id'];
-            $query = "UPDATE `west_village`.`topping` SET `title`='$title'";
+            $query = "UPDATE `west_village`.`topping` SET `title`='$title',`text`='$text'";
         }
         mysql_query($query);
         //echo "<script>alert('okedeh 3');</script>";
@@ -46,7 +46,6 @@ if (isset($_POST['text']) || isset($_POST['title'])) {
 } else {
     $_SESSION['warning'] = "none";
 }
-echo $query;
 ?>
 <script src="tinymce/tinymce.min.js"></script>
 <script>tinymce.init({selector: 'textarea'});</script>
