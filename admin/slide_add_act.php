@@ -2,7 +2,6 @@
 include_once './inc/head.php';
 $text=$_POST['text'];
 $pic = count($_FILES['picture']['tmp_name']);
-echo $pic;
 for ($i = 0; $i < $pic; $i++) {
     if ($_FILES['picture']['error'][$i] == UPLOAD_ERR_OK) {
         if (isset($_FILES['picture']['tmp_name'][$i])) {
