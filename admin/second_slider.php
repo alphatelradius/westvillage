@@ -1,6 +1,46 @@
 <?php
 include_once './inc/head.php';
 cek_login();
+
+if (isset($_POST['text'])) {
+    $title=$_POST['text'];
+    if (isset($_FILES['picture'])) {
+        $tempName = $_FILES['picture']['tmp_name'];
+        $fileName = $_FILES['picture']['name'];
+        $saveDirectory = '../img/';
+        if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
+//                echo ' File Successfully Uploaded!';
+            if ($_POST['id'] == '') {
+                $query = "INSERT INTO `second_slider` (`id`, `text`,`picture`, `date_upload`) VALUES (NULL,'$title', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
+            } else {
+                $id=$_POST['id'];
+                $query = "UPDATE `second_slider` SET `text`='$title', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
+            }
+            mysql_query($query);
+            //echo "<script>alert('okedeh 1');</script>";
+        } else {
+             if ($_POST['id'] == '') {
+                $query = "INSERT INTO `second_slider` (`id`, `text`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
+            } else {
+                $id=$_POST['id'];
+                $query = "UPDATE `second_slider` SET `text`='$title' WHERE id='$id'";
+            }
+            mysql_query($query);
+            //echo "<script>alert('okedeh 2');</script>";
+        }
+    }else{
+         if ($_POST['id'] == '') {
+                $query = "INSERT INTO `second_slider` (`id`, `text`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
+            } else {
+                $id=$_POST['id'];
+                $query = "UPDATE `second_slider` SET `text`='$title'";
+            }
+            mysql_query($query);
+            //echo "<script>alert('okedeh 3');</script>";
+    }
+}else{
+    //echo "<script>alert('okedeh');</script>";
+}
 ?>
 
 <body>
@@ -21,7 +61,7 @@ cek_login();
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" method="POST" action="second_slide_add_act.php" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="second_slider.php?id=<?php echo $_GET['id']; ?>" enctype="multipart/form-data">
                                         <?php
                                         $query_slide = "select * from second_slider";
                                         $result_slider = mysql_query($query_slide);
@@ -51,8 +91,8 @@ cek_login();
                                             <div class="col-lg-12" style="border-bottom: 1px solid #cccccc; margin-bottom: 20px;"></div>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <button type="submit" class="btn btn-default">Submit Button</button>
-                                            <button type="reset" class="btn btn-default">Reset Button</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="reset" class="btn btn-default">Reset</button>
                                         </div>
                                     </form>
                                 </div>
