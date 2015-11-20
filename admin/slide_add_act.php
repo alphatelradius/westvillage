@@ -10,7 +10,7 @@ for ($i = 0; $i < $pic; $i++) {
             $saveDirectory = '../img/';
             if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
 //                echo ' File Successfully Uploaded!';
-                $query="INSERT INTO `west_village`.`main_slider` (`id`, `picture`, `text`, `date_upload`) VALUES (NULL, 'img/".$fileName."', '".$text[$i]."', CURRENT_TIMESTAMP)";
+                $query="INSERT INTO `main_slider` (`id`, `picture`, `text`, `date_upload`) VALUES (NULL, 'img/".$fileName."', '".$text[$i]."', CURRENT_TIMESTAMP)";
                 mysql_query($query);
             } else {
                 //echo 'There was an error while uploading the file.';
@@ -19,6 +19,6 @@ for ($i = 0; $i < $pic; $i++) {
     } elseif ($_FILES['picture']['size'][$i] > 100000) {
         //echo 'File is greater than maximum allow file size.';
     }
-    header('location: slide.php');
 }
+header('location: slide.php');
 ?>

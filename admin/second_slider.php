@@ -2,44 +2,25 @@
 include_once './inc/head.php';
 cek_login();
 
-if (isset($_POST['text'])) {
-    $title=$_POST['text'];
-    if (isset($_FILES['picture'])) {
-        $tempName = $_FILES['picture']['tmp_name'];
-        $fileName = $_FILES['picture']['name'];
-        $saveDirectory = '../img/';
-        if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
+$text = $_POST['text'];
+$pic = count($_FILES['picture']['tmp_name']);
+for ($i = 0; $i < $pic; $i++) {
+    if ($_FILES['picture']['error'][$i] == UPLOAD_ERR_OK) {
+        if (isset($_FILES['picture']['tmp_name'][$i])) {
+            $tempName = $_FILES['picture']['tmp_name'][$i];
+            $fileName = $_FILES['picture']['name'][$i];
+            $saveDirectory = '../img/';
+            if (@move_uploaded_file($tempName, $saveDirectory . $fileName)) {
 //                echo ' File Successfully Uploaded!';
-            if ($_POST['id'] == '') {
-                $query = "INSERT INTO `second_slider` (`id`, `text`,`picture`, `date_upload`) VALUES (NULL,'$title', 'img/" . $fileName . "', CURRENT_TIMESTAMP)";
+                $query = "INSERT INTO `second_slider` (`id`, `picture`, `text`, `date_upload`) VALUES (NULL, 'img/" . $fileName . "', '" . $text[$i] . "', CURRENT_TIMESTAMP)";
+                mysql_query($query);
             } else {
-                $id=$_POST['id'];
-                $query = "UPDATE `second_slider` SET `text`='$title', `picture`= 'img/" . $fileName . "' WHERE id='$id')";
+                //echo 'There was an error while uploading the file.';
             }
-            mysql_query($query);
-            //echo "<script>alert('okedeh 1');</script>";
-        } else {
-             if ($_POST['id'] == '') {
-                $query = "INSERT INTO `second_slider` (`id`, `text`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
-            } else {
-                $id=$_POST['id'];
-                $query = "UPDATE `second_slider` SET `text`='$title' WHERE id='$id'";
-            }
-            mysql_query($query);
-            //echo "<script>alert('okedeh 2');</script>";
         }
-    }else{
-         if ($_POST['id'] == '') {
-                $query = "INSERT INTO `second_slider` (`id`, `text`, `date_upload`) VALUES (NULL,'$title', CURRENT_TIMESTAMP)";
-            } else {
-                $id=$_POST['id'];
-                $query = "UPDATE `second_slider` SET `text`='$title'";
-            }
-            mysql_query($query);
-            //echo "<script>alert('okedeh 3');</script>";
+    } elseif ($_FILES['picture']['size'][$i] > 100000) {
+        //echo 'File is greater than maximum allow file size.';
     }
-}else{
-    //echo "<script>alert('okedeh');</script>";
 }
 ?>
 
@@ -67,11 +48,13 @@ if (isset($_POST['text'])) {
                                         $result_slider = mysql_query($query_slide);
                                         while ($row = mysql_fetch_array($result_slider)) {
                                             ?>
-                                            <div class="form-group col-md-10">
-                                                <img style="width: 60%;" src="<?php echo $base_url.$row['picture'];?>"/>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <div id='<?php echo $row['id']; ?>' class="del-slide btn btn-danger btn-small"><i class="fa fa-trash-o"></i></div>
+                                            <div>
+                                                <div class="form-group col-md-10">
+                                                    <img style="width: 60%;" src="<?php echo $base_url . $row['picture']; ?>"/>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <div id='<?php echo $row['id']; ?>' class="del-slide btn btn-danger btn-small"><i class="fa fa-trash-o"></i></div>
+                                                </div>
                                             </div>
                                             <?php
                                         }
@@ -156,6 +139,22 @@ if (isset($_POST['text'])) {
             });
 
 
+        });
+
+        $(".del-slide").click(function () {
+            var id = $(this).attr('id');
+            $.ajax({
+                type: "POST",
+                url: "slide_delete_second.php",
+                data: {pic_id: id},
+                dataType: "text",
+                cache: false,
+                success:
+                        function (data) {
+                            console.log(data);
+                        }
+            });
+            $(this).parent().parent().remove();
         });
     </script>
 </body>
