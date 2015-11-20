@@ -7,10 +7,10 @@
         <div class="single-content" id="<?php echo str_replace(' ', '_', $row['title']) ?>">
             <div class="lightbox">
                 <div class="thumb">
-                    <img width="880" height="600" src="<?php echo $row['picture'] ?>" class="attachment-lightbox" alt="salad.jpg">
+                    <img width="880" height="600" src="<?php echo $row['picture'] ?>" class="attachment-lightbox" alt="<?php echo $row['title']; ?>">
                 </div>
                 <div class="thumb mobile">
-                    <img width="280" height="330" src="<?php echo $row['picture'] ?>" class="attachment-mobile-lightbox" alt="(16).jpg">
+                    <img width="280" height="330" src="<?php echo $row['picture'] ?>" class="attachment-mobile-lightbox" alt="<?php echo $row['title']; ?>">
                 </div>
                 <div class="content-wrapper">
                     <div class="content">
